@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables
 // ignore_for_file: unused_local_variable
 // ignore_for_file: use_build_context_synchronously
 // ignore_for_file: prefer_const_constructors
@@ -27,9 +27,9 @@ class LoginApp extends StatelessWidget {
       title: "Flutter + Mysql",
       home: const LoginPage(),
       routes: <String, WidgetBuilder>{
-        '/powerPage': (BuildContext context) => const Power(),
-        '/vendedoresPage': (BuildContext context) => const Vendedores(),
-        'LoginPage': (BuildContext context) => const LoginPage(),
+        'lib/pages/powerPage': (BuildContext context) => const Power(),
+        'lib/pages/vendedoresPage': (BuildContext context) => const Vendedores(),
+        'lib/LoginPage': (BuildContext context) => const LoginPage(),
       },
     );
   }
@@ -47,14 +47,14 @@ class _LoginPagetState extends State<LoginPage> {
   TextEditingController controllerPass = new TextEditingController();
 
   String message = "";
-
-  Future<String> login() async {
- 
-    final response = await http.post("http://localhost/tienda/login.php", body: {
+  
+  Future<List> _login() async { 
+    final response = await http.post(Uri.parse("http://192.168.1.72:80/tienda/login.php"), body: {
       "username": controllerUser.text,
       "password": controllerPass.text,
-    });
-
+    },  
+    );
+    
     var datauser = json.decode(response.body);
 
     if (datauser.length == 0) {
@@ -63,10 +63,10 @@ class _LoginPagetState extends State<LoginPage> {
       });
     } else {
       if (datauser[0]['nivel'] == 'admin') {
-        Navigator.pushReplacementNamed(context, '/powerPage');
+         Navigator.push(context,MaterialPageRoute(builder: (context) => Power(),));
       } else if (datauser[0]['nivel'] == 'ventas') {
-        Navigator.pushReplacementNamed(context, '/vendedoresPage');
-      }
+        Navigator.push(context,MaterialPageRoute(builder: (context) => Vendedores(),));
+      } 
       setState(() {
         username = datauser[0]['username'];
       });
@@ -191,7 +191,7 @@ class _LoginPagetState extends State<LoginPage> {
                       ),
                     ),
                     onPressed: () {
-                      login();
+                      _login();
                       Navigator.pop(context);
                     },
                     child: Text("Sign In"),

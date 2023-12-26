@@ -4,6 +4,7 @@
 // ignore_for_file:  file_names
 
 
+import 'package:apptiendas/main.dart';
 import 'package:flutter/material.dart';
 
 class Power extends StatelessWidget {
@@ -12,14 +13,14 @@ class Power extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: new AppBar(title: Text("Página power"),),
+      appBar: new AppBar(title: Text("Página Admin"),),
       body: new Column(
         children: <Widget>[
-          Text("Estamos em power"),
+          Text("Estamos na página do adm"),
             ElevatedButton(
               child: Text("Sair"),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/LoginPage');
+                Navigator.push(context,MaterialPageRoute(builder: (context) => LoginPage(),));            
               },
             ),
         ],

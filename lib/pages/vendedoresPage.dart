@@ -4,6 +4,7 @@
 // ignore_for_file:  file_names
 
 
+import 'package:apptiendas/main.dart';
 import 'package:flutter/material.dart';
 
 class Vendedores extends StatelessWidget {
@@ -20,7 +21,7 @@ class Vendedores extends StatelessWidget {
           ElevatedButton(
               child: Text("Sair"),
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/LoginPage');
+                Navigator.push(context,MaterialPageRoute(builder: (context) => LoginPage(),));
               },
             ),
         ],
