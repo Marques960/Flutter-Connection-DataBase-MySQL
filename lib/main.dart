@@ -30,6 +30,7 @@ class LoginApp extends StatelessWidget {
         'lib/pages/powerPage': (BuildContext context) => const Power(),
         'lib/pages/vendedoresPage': (BuildContext context) => const Vendedores(),
         'lib/LoginPage': (BuildContext context) => const LoginPage(),
+        
       },
     );
   }
