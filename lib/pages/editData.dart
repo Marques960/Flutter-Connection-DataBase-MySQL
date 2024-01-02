@@ -19,7 +19,7 @@ class _EditDataState extends State<EditData> {
   late TextEditingController controllerPassword;
   late TextEditingController controllerNivel;
 
-/*
+
   void EditData() {
     var url = "http://192.168.1.72:80/tienda/editdata.php";
 
@@ -30,48 +30,6 @@ class _EditDataState extends State<EditData> {
       "nivel": controllerNivel.text,
     });
   }
-*/
-Future<void> EditData() async {
-  print("Sending HTTP request...");
-
-  var url = "http://192.168.1.72:80/tienda/editdata.php";
-
-  try {
-    var response = await http.post(Uri.parse(url), body: {
-      "id": widget.list[widget.index]['id'],
-      "username": controllerUsername.text,
-      "password": controllerPassword.text,
-      "nivel": controllerNivel.text,
-    });
-
-    // Check the request body
-    print("Request Body: ${{
-      "id": widget.list[widget.index]['id'],
-      "username": controllerUsername.text,
-      "password": controllerPassword.text,
-      "nivel": controllerNivel.text,
-    }}");
-
-    // Check the response status and body
-    print("Response Status Code: ${response.statusCode}");
-    print("Response Body: ${response.body}");
-
-    // Check if the data was updated successfully
-    if (response.statusCode == 200) {
-      print("Data updated successfully");
-      // You can add additional logic here if needed
-    } else {
-      print("Failed to update data. Status code: ${response.statusCode}");
-      // You can handle errors or display a message to the user
-    }
-  } catch (e) {
-    print("Error: $e");
-    // Handle network or other errors
-  }
-}
-
-
-
 
 
   @override
